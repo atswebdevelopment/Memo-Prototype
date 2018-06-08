@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * gap:; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="theme-color" content="#36005D" />
+    <link href="css/main.css" rel="stylesheet" />
+    <!--<link rel="shortcut icon" href="/favicon.png">-->
+    <title>Memo</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700" rel="stylesheet">
+    <!-- End Fonts -->
+</head>
+<body class="add-details">
+
+    <div class="container container--alt">
+        <a href="add.html" class="back"><span class="svg-load" data-src="images/icon-arrow-small.svg"></span> Back</a>
+
+        <!-- Background elements -->
+        <span class="svg-load cloud cloud--1" data-src="images/icon-cloud.svg"></span>
+        <span class="svg-load cloud cloud--2" data-src="images/icon-cloud.svg"></span>
+        <span class="svg-load cloud cloud--3" data-src="images/icon-cloud.svg"></span>
+        <span class="svg-load cloud cloud--4" data-src="images/icon-cloud.svg"></span>
+        <!-- End Background elements-->
+
+        <div class="inner">
+            <div class="upload">
+                <div class="upload__inner">
+                    <h1>Nationwide 01</h1>
+                    <form class="form ajax" data-method="" novalidate>
+                        <fieldset class="active">
+                            <div class="form__field">
+                                <label for="det_insuranceProvider">Insurance provider</label>
+                                <input type="text" name="insuranceProvider" id="det_insuranceProvider" class="required" value="Nationwide" />
+                                <span class="img-load valid-icon" data-src="images/icon-tick.svg"></span>
+                            </div>
+                            <div class="form__field">
+                                <label for="det_policyNumber">Policy number</label>
+                                <input type="text" name="policyNumber" id="det_policyNumber" class="required" value="WIH2 428F H8H4" />
+                                <span class="img-load valid-icon" data-src="images/icon-tick.svg"></span>
+                            </div>
+                            <div class="form__field">
+                                <label for="det_annualPremium">Annual premium</label>
+                                <input type="text" name="det_annualPremium" id="det_annualPremium" class="required" value="£2,600" />
+                                <span class="img-load valid-icon" data-src="images/icon-tick.svg"></span>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="file-list">
+            <div class="inner">
+                <label>Policy documents</label>
+            </div>
+        </div>
+
+        <div class="action">
+            <a href="add-upload.html">
+                <span class="action__icon svg-load" data-src="images/icon-plus.svg"></span>
+                <!--<span class="action__text">Add a vehicle</span>-->
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>memo</p>
+        </div>
+        <!-- End Footer -->
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- End Google Analytics -->
+
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/slick.min.js"></script>
+    <script src="scripts/main.min.js"></script>
+</body>
+</html>

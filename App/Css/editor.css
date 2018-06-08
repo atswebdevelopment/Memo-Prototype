@@ -1,0 +1,15 @@
+h1,h2,h4,h5,h6,p,img,li,blockquote,table{margin-bottom:40px}h1{font-size:58px;font-weight:900;letter-spacing:5.8px;text-transform:uppercase;margin-bottom:10px}@media only screen and (max-width: 767px){h1{font-size:25px}}h2{color:#0bfab7;font-size:30px;font-weight:700;letter-spacing:9px;line-height:38px;text-transform:uppercase}@media only screen and (max-width: 767px){h2{font-size:13px;letter-spacing:3.9px;margin-bottom:30px}}h3{font-size:33px;color:#0bfab7;text-transform:uppercase;padding-top:20px;margin-bottom:30px}@media only screen and (max-width: 767px){h3{font-size:23px}}p,li{line-height:30px}.intro{font-size:25px}@media only screen and (max-width: 767px){.intro{font-size:20px}}.narrow{max-width:800px;margin-left:auto;margin-right:auto}.buttons a,.button a,a .button,a.button,button.button{line-height:56px;display:inline-block;background:#FFF;color:#7533ff;font-weight:600;font-size:16px;padding:0 30px;min-width:182px;position:relative;border-radius:28px;box-sizing:border-box;text-transform:uppercase;text-align:center;letter-spacing:1.28px}@media only screen and (max-width: 767px){.buttons a,.button a,a .button,a.button,button.button{line-height:48px;font-size:14px;min-width:156px}}.buttons a:hover,.button a:hover,a:hover .button,a.button:hover,.boxes__box:hover .button a,.buttons .active a,button.button:hover{text-decoration:none;background-color:#7533ff;color:#FFF}.arrow a{position:absolute;bottom:40px;left:50%;margin-left:-35px;display:block;width:70px}.arrow a .a{opacity:0.85}.arrow a .b{fill:#1C1B45}.arrow a .c{fill:#0bfab7}@media only screen and (max-width: 767px){.arrow a{width:56px;margin-left:-28px}}.title{font-size:60px;font-weight:700;letter-spacing:3px;display:block;margin-bottom:45px}@media only screen and (max-width: 767px){.title{font-size:23px;letter-spacing:1.15px;margin-bottom:25px}}.highlight{font-size:35px;font-weight:300;letter-spacing:2.97px;line-height:70px;max-width:720px;display:inline-block}@media only screen and (max-width: 767px){.highlight{font-size:25px;letter-spacing:1px;line-height:38px}}.subtitle{font-size:30px;font-weight:500;letter-spacing:0.9px;line-height:55px}@media only screen and (max-width: 767px){.subtitle{font-size:13px;line-height:28px}}.timestamp{font-size:16px;display:block;margin:60px 0}@media only screen and (max-width: 767px){.timestamp{margin-top:0}}.timestamp__icon{width:16px;height:20.31px;margin-right:10px;position:relative;top:5px}.timestamp__icon .a{fill:#46474F}.footnote{font-size:20px;font-weight:700;letter-spacing:4px;line-height:30px}.icon svg .a{fill:#0bfab7;stroke:#0bfab7}.icon svg .b{fill:#FFF;stroke:#FFF}.star svg{width:16px;height:15.37px}.star svg .a{fill:#f7a219}.close a{width:35px;height:35px;display:block}.close a svg{width:100%;height:100%}.close a svg .b{stroke:#FFF;stroke-width:1.5px}.close a svg .c{fill:#0bfab7}.close a svg .e{fill:#FFF}
+/*# sourceMappingURL=editor.css.map */
+
+
+/**umb_name:Header 1*/
+h2 {
+}
+
+/**umb_name:Intro*/
+.intro {
+}
+
+/**umb_name:Button*/
+.button {
+}

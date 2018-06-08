@@ -1,0 +1,29 @@
+﻿.splash {
+    display:none;
+    font-size: $base + 15;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20vh;
+    min-height: 200px;
+
+    &__stage {
+        position: absolute;
+        left:0;
+        opacity: 0;
+        transform: scale(0.5);
+        transition: all 1s $bezier;
+        width: 100%;
+        padding:0 20px;
+        box-sizing:border-box;
+
+        &--active {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+}
+
+.get-started,
+.login{
+    display:none;
+}

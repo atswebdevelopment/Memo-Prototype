@@ -1,0 +1,43 @@
+﻿/*#region Fonts*/
+
+$primaryfont: 'PT Sans', sans-serif;
+$secondaryfont: Helvetica,sans-serif;
+$base: 18px;
+$spacing: 34px;
+
+/*#endregion*/
+
+/*#region Colours */
+
+$black: #000;
+$black-alt: #2F2F2F;
+$black-light: #46474F;
+$white: #FFF;
+$grey: #F2F2F2;
+
+$primary: #36005D; 
+$primary-alt: #f00;
+$primary-dark: #189fd0;
+$secondary: #F850FF; //pink
+$tertiary: #00B8E5;
+$quaternary: #00C5FF; 
+
+$table: #FFF;
+$table-alt: #c8c8cd;
+$alert: #FF3D5D;
+
+$shadow:rgba(#C3C3D3,0.44);
+
+$bezier: cubic-bezier(.21,.96,.59,.97);
+
+/*#endregion*/
+
+/*#region Media Queries*/
+
+$breakpoints: (
+    small: 470px,
+    phone: 768px,
+    tablet: 1024px
+);
+
+/*#endregion*/

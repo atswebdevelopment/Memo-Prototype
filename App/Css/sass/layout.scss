@@ -1,0 +1,92 @@
+﻿.container {
+    overflow: hidden;
+    background: linear-gradient(to bottom, rgba(100,68,123,1) 1%,rgba(94,71,125,1) 10%,rgba(17,82,116,1) 70%,rgba(52,62,92,1) 100%);
+    min-height: 100%;
+    position: relative;
+    padding: 82px 0 100px;
+    box-sizing: border-box;
+    z-index: 1;
+
+    &--no-nav{
+        padding-top:42px;
+    }
+
+    &--alt {
+        background: $primary;
+        background: linear-gradient(to bottom, #F850FF 0%,#36005D 100%);
+
+        .back{
+            .a{
+                fill:$white;
+            }
+        }
+    }
+
+    &--theme-1 {
+        background: linear-gradient(to right, rgba(100,68,123,1) 1%,rgba(94,71,125,1) 10%,rgba(17,82,116,1) 70%,rgba(52,62,92,1) 100%);
+    }
+}
+
+.inner{
+    width:1706px;
+    margin:0 auto;
+    max-width:100%;
+    padding:0 20px;
+    position:relative;
+    z-index:3;
+    box-sizing: border-box;
+    @include group();
+}
+
+.logo {
+    width: 210px;
+    height: 210px;
+    border: 20px solid rgba($white,0.2);
+    border-radius: 50%;
+    margin: 0 auto 40px;
+
+    &--small {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        border-width: 7px;
+    }
+
+    &--help {
+        width: 54px;
+        height: 54px;
+        border-width: 16px;
+    }
+
+    &--icon {
+        width: 120px;
+        height: 120px;
+        border: none;
+    }
+
+    .a {
+        fill: $white;
+    }
+}
+
+.header{
+    position:relative;
+
+    .back{
+        top:0;
+    }
+}
+
+.footer{
+    p{
+        font-weight:bold;
+        font-size:$base + 12;
+        opacity:0.2;
+        text-align:center;
+        margin:20px 0 48px;
+        position:absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+    }
+}

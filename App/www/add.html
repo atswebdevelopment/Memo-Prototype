@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no" />
+    <meta name="theme-color" content="#36005D" />
+    <link href="css/main.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="/favicon.png">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700" rel="stylesheet">
+    <!-- End Fonts -->
+</head>
+<body>
+
+    <div class="container container--alt">
+        <a href="mortgages.html" class="back"><span class="svg-load" data-src="images/icon-arrow-small.svg"></span> Back</a>
+
+        <!-- Background elements -->
+        <span class="svg-load cloud cloud--1" data-src="images/icon-cloud.svg"></span>
+        <span class="svg-load cloud cloud--2" data-src="images/icon-cloud.svg"></span>
+        <span class="svg-load cloud cloud--3" data-src="images/icon-cloud.svg"></span>
+        <span class="svg-load cloud cloud--4" data-src="images/icon-cloud.svg"></span>
+        <!-- End Background elements-->
+
+        <div class="inner">
+            <div class="logo logo--icon">
+                <span class="svg-load" data-src="images/icon-mortgages.svg"></span>
+            </div>
+            <p>
+                Add your mortgage statement here for quick reference
+            </p>
+
+            <form class="form" novalidate>
+                <fieldset class="active">
+                    <div class="form__field form__field--selection">
+                        <div class="radio">
+                            <div class="radio__input">
+                                <input type="radio" name="add" id="add_link" />
+                            </div>
+                            <label for="add_link">Link to provider</label>
+                        </div>
+                        <div class="radio">
+                            <div class="radio__input">
+                                <input type="radio" name="add" id="add_upload" value="upload" />
+                            </div>
+                            <label for="add_upload">Upload documents</label>
+                        </div>
+                        <div class="radio">
+                            <div class="radio__input">
+                                <input type="radio" name="add" id="add_details" value="details" />
+                            </div>
+                            <label for="add_details">Type in details</label>
+                        </div>
+                        <span class="img-load valid-icon" data-src="images/icon-tick.svg"></span>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>memo</p>
+        </div>
+        <!-- End Footer -->
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- End Google Analytics -->
+
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/slick.min.js"></script>
+    <script src="scripts/main.min.js"></script>
+</body>
+</html>

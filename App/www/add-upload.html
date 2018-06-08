@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * gap:; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no" />
+    <meta name="theme-color" content="#36005D" />
+    <link href="css/main.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="/favicon.png">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700" rel="stylesheet">
+    <!-- End Fonts -->
+</head>
+<body>
+
+    <div class="container container--alt">
+        <a href="add.html" class="back"><span class="svg-load" data-src="images/icon-arrow-small.svg"></span> Back</a>
+
+        <!-- Background elements -->
+        <span class="svg-load cloud cloud--1" data-src="images/icon-cloud.svg"></span>
+        <span class="svg-load cloud cloud--2" data-src="images/icon-cloud.svg"></span>
+        <span class="svg-load cloud cloud--3" data-src="images/icon-cloud.svg"></span>
+        <span class="svg-load cloud cloud--4" data-src="images/icon-cloud.svg"></span>
+        <!-- End Background elements-->
+
+        <div class="inner">
+            <div class="upload">
+
+                <div class="upload__stage upload__stage--stage-1">
+                    <ul class="upload__links">
+                        <li class="upload__link">
+                            <a class="upload__link-camera" href="#">
+                                <span class="svg-load upload__link-icon" data-src="images/icon-camera.svg"></span>
+                                <span class="upload__link-title">Scan document</span>
+                            </a>
+                        </li>
+                        <li class="upload__link">
+                            <a class="upload__link-library" href="#">
+                                <span class="svg-load upload__link-icon" data-src="images/icon-upload.svg"></span>
+                                <span class="upload__link-title">Upload document from library</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <span class="upload__background img-load" data-src="images/image-scan.svg"></span>
+                </div>
+
+                <div class="upload__stage upload__stage--stage-2">
+                    <div class="upload__inner"></div>
+                    <ul class="upload__links upload__links--retry">
+                        <li class="upload__link">
+                            <a class="upload__link-camera" href="#">
+                                <span class="svg-load upload__link-icon" data-src="images/icon-camera.svg"></span>
+                                <span class="upload__link-title">Scan again</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p><span class="button button--center upload__button-confirm"><a href="#">Use this</a></span></p>
+                </div>
+
+                <div class="upload__stage upload__stage--stage-3">
+                    <span class="h1">Name and tag your upload</span>
+                    <span class="img-load upload__file-icon" data-src="images/icon-file.svg"></span>
+                    <form class="form" novalidate>
+                        <fieldset class="active">
+                            <div class="form__field">
+                                <label for="upl_filename">Up to 25 characters</label>
+                                <input type="text" name="filename" id="upl_filename" class="required customName" maxlength="25" />
+                            </div>
+                            <div class="form__field form__field--button">
+                                <span class="button button--center upload__button-save"><a href="#">Save</a></span>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="upload__stage upload__stage--stage-4">
+                    <span class="h1">Nice one</span>
+                    <p>
+                        <span class="img-load" data-src="images/image-thanks.svg"></span><br /><br /><br />
+                    </p>
+                    <p>
+                        <span class="button button--center upload__button-refresh"><a href="#">Upload another</a></span><br />
+                    </p>
+                    <p>
+                        <span class="button button--center upload__button-done"><a href="#">Done</a></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>memo</p>
+        </div>
+        <!-- End Footer -->
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- End Google Analytics -->
+
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/slick.min.js"></script>
+    <script src="scripts/main.min.js"></script>
+</body>
+</html>

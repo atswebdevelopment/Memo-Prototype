@@ -1,0 +1,94 @@
+﻿@mixin media-query($width, $type: min) {
+    @if map_has_key($breakpoints, $width) {
+        $width: map_get($breakpoints, $width);
+        @if $type == max {
+            $width: $width - 1px;
+        }
+        @media only screen and (#{$type}-width: $width) {
+            @content;
+        }
+    }
+}
+
+@mixin font($font) {
+    @if $font == primary {
+        font-family:$primaryfont;
+        font-weight:100;
+    }
+    @if $font == secondary {
+        font-family:$secondaryfont;
+        text-transform:uppercase;
+        font-weight:600;
+    }
+}
+
+@mixin placeholder($color){
+    input::-webkit-input-placeholder {
+        @include media-query(tablet, max){
+            color: $color !important;
+        }
+    }
+ 
+    input:-moz-placeholder { /* Firefox 18- */
+        @include media-query(tablet, max){
+            color: $color !important;
+        }
+    }
+ 
+    input::-moz-placeholder {  /* Firefox 19+ */
+        @include media-query(tablet, max){
+            color: $color !important;
+        }
+    }
+ 
+    input:-ms-input-placeholder {  
+        @include media-query(tablet, max){
+            color: $color !important;
+        }
+    }
+}
+
+@mixin svg($color){
+    fill:$color;
+    stroke:$color;
+}
+
+@mixin group {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin fill {
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+}
+
+@mixin clearlist {
+    display:inline-block;
+    padding-left:0;
+
+    &:before{
+        content:none;
+    }
+}
+
+@mixin vertical {
+    &:before{
+        content:"";
+        width:1px;
+        height:100%;
+        vertical-align:middle;
+        display:inline-block;
+    }
+    .vertical-block{
+        vertical-align:middle;
+        display:inline-block;
+        box-sizing: border-box;
+    }
+}

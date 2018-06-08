@@ -1,0 +1,360 @@
+﻿h1, .h1, h2, h3, h4, h5, h6, p, img, li, blockquote, table {
+    margin-bottom: 20px;
+}
+
+h1, .h1 {
+    font-size: $base + 9;
+}
+
+.h1{
+    display:block;
+    font-weight:bold;
+}
+
+h2 {
+    font-size: $base - 4;
+    letter-spacing:0.5px;
+}
+
+h3 {
+    font-size: $base - 9;
+    letter-spacing: 0.5px;
+}
+
+.intro {
+    font-size: $base + 2;
+}
+
+.buttons a,
+.button a,
+a .button,
+a.button,
+button.button {
+    line-height: 54px;
+    display: inline-block;
+    background: $quaternary;
+    color: $white;
+    font-size: $base + 2;
+    padding: 0 27px;
+    position: relative;
+    border-radius: 33px;
+    box-sizing: border-box;
+    text-align: center;
+    border: 1px solid $quaternary;
+    text-decoration: none;
+    min-width: 136px;
+}
+
+.buttons a:hover,
+.button a:hover,
+a:hover .button,
+a.button:hover,
+.boxes__box:hover .button a,
+.buttons .active a,
+button.button:hover {
+    text-decoration: none;
+    background-color: $primary;
+    border-color: $primary;
+    color: $white;
+}
+
+.buttons--alt a,
+.button--alt a,
+a .button--alt,
+a.button--alt,
+button.button--alt {
+    background-color: rgba($black,0.24);
+    border-color:rgba($white,0.2);
+}
+
+.buttons--white a,
+.button--white a,
+a .button--white,
+a.button--white,
+button.button--white {
+    color: $primary;
+    background: $white;
+}
+
+.button--center{
+    text-align:center;
+    display:block;
+}
+
+.controls {
+    position: relative;
+
+    &__arrow {
+        margin-bottom: 25px;
+
+        &--left {
+            float: left;
+            margin-left: 20px;
+            transform: rotate(180deg);
+        }
+
+        &--right {
+            margin-right: 20px;
+            float: right;
+        }
+
+        &--inactive{
+            opacity:0.35;
+        }
+    }
+
+    &__pips {
+        display: block;
+        clear: both;
+    }
+
+    &__pip {
+        @include clearlist();
+        opacity: 0.53;
+
+        a {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: block;
+            background: $white;
+            margin: 0 4px;
+        }
+
+        &--active {
+            opacity: 1;
+        }
+    }
+}
+
+.arrow {
+    width: 55px;
+    height: 55px;
+    display: inline-block;
+
+    .a {
+        opacity: 1;
+        fill:$white;
+    }
+}
+
+.back {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    z-index: 4;
+    text-decoration: none;
+
+    svg {
+        width: 8px;
+        height: 16px;
+        position: relative;
+        top: 1px;
+        margin-right: 5px;
+
+        .a{
+            fill:$white;
+        }
+    }
+}
+
+.help {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1;
+    display: block;
+    opacity: 0.35;
+    text-decoration: none;
+
+    svg {
+        display: inline-block;
+        width: 24px;
+        margin-left: 4px;
+        vertical-align: top;
+
+        .a{
+            fill:$white;
+        }
+    }
+}
+
+.title {
+    font-size: $base + 27;
+    font-weight: 700;
+    letter-spacing: 3px;
+    display: block;
+    margin-bottom: 45px;
+
+    @include media-query(phone, max) {
+        font-size: $base + 5;
+        letter-spacing: 1.15px;
+        margin-bottom: 25px;
+    }
+}
+
+.icon {
+    width: 66px;
+    height: 66px;
+    margin-bottom: 10px;
+
+    .a {
+        opacity: 0.078;
+    }
+
+    .a, .b{
+        fill:$white;
+    }
+
+    &--plain{
+        .a{
+            opacity: 1;
+        }
+    }
+}
+
+.close {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 33px;
+    height: 33px;
+    display: block;
+    transform: rotateZ(45deg);
+    z-index:4;
+
+    svg{
+        .a {
+            fill: $white;
+        }
+
+        .b{
+            fill: $secondary;
+        }
+    }
+}
+
+.action{
+    text-align:center;
+    margin-bottom:20px;
+
+    &__icon{
+        width:35px;
+        height:35px;
+        display:block;
+        margin:0 auto 10px;
+
+        .a{fill:$white;}
+        .b{fill:$secondary;}
+    }
+
+    &__text{
+        display:block;
+    }
+
+    a{
+        text-decoration:none;
+    }
+}
+
+.edit {
+    position: absolute;
+    top: -14px;
+    right: 0;
+    width: 43px;
+    height: 43px;
+    padding: 14px;
+    box-sizing: border-box;
+    display: block;
+    opacity: 0.8;
+
+    svg {
+        vertical-align: top;
+    }
+}
+
+.expand{
+    float:right;
+    display:block;
+    width:25px;
+    height:25px;
+    opacity:0.5;
+}
+
+.cloud {
+    position: absolute;
+    width: 225px;
+    opacity: 0.02;
+
+    .a {
+        fill: url(#a);
+    }
+
+    &--1 {
+        top: 19px;
+        left: -104px;
+        opacity: 0.09;
+    }
+
+    &--2 {
+        width: 174px;
+        top: 67px;
+        left: -87px;
+        opacity: 0.21;
+    }
+
+    &--3 {
+        top: 125px;
+        right: -120px;
+
+        .a {
+            fill: $white;
+        }
+    }
+
+    &--4 {
+        width: 183px;
+        top: 500px;
+        left: -62px;
+
+        .a {
+            fill: $white;
+        }
+    }
+
+    &--5 {
+        opacity: 0.02;
+
+        .a {
+            fill: $white;
+        }
+    }
+
+    &--6 {
+        .a {
+            fill: $secondary;
+        }
+    }
+
+    &--98 {
+        opacity: 0.2;
+        top: 189px;
+        left: 41px;
+        width: 183px;
+
+        .a {
+            fill: $white;
+        }
+    }
+
+    &--99 {
+        opacity: 0.1;
+        top: 303px;
+        right: 26px;
+        width: 183px;
+
+        .a {
+            fill: $secondary;
+        }
+    }
+}
