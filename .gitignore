@@ -212,3 +212,5 @@ ModelManifest.xml
 
 *.sln
 App/www.zip
+.idea/
+App/plugins/browser.json
