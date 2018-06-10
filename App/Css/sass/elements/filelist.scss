@@ -1,0 +1,39 @@
+﻿.file-list {
+    margin-bottom: 20px;
+
+    &__item {
+        background: rgba($black,0.4);
+        text-align: left;
+        padding: 20px 20px 0;
+        position: relative;
+        margin-bottom: 1px;
+    }
+
+    &__link {
+        z-index: 4;
+        @include fill();
+    }
+
+    &__icon {
+        float: left;
+        width: 50px;
+        margin: 0 15px 20px 0;
+    }
+
+    &__title {
+        display: block;
+        font-weight: bold;
+        font-size: $base - 4;
+        opacity: 0.6;
+    }
+
+    &__subtitle {
+        display: block;
+        margin-bottom: 20px;
+        font-size: $base - 4;
+    }
+
+    label {
+        padding: 0 20px;
+    }
+}

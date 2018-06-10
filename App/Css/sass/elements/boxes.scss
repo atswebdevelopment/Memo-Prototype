@@ -1,0 +1,67 @@
+﻿.boxes {
+    width: 100%;
+    border-top: 1px solid rgba($white,0.16);
+    margin-bottom: 20px;
+    @include group();
+
+    &__box {
+        float: left;
+        width: 50%;
+        height: 176px;
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba($white,0.16);
+        padding: 15px 18px 0;
+        text-align: left;
+        position: relative;
+
+        &:nth-child(odd) {
+            border-right: 1px solid rgba($white,0.16);
+        }
+    }
+
+    &__link {
+        z-index: 2;
+        @include fill();
+
+        &:active, &:hover {
+            background: rgba($secondary,0.33);
+        }
+    }
+
+    &__icon {
+        width: 106px;
+        height: 106px;
+        margin: 0 auto;
+        display: block;
+        position: relative;
+
+        .icon {
+            width: 86px;
+            height: 86px;
+            padding: 10px;
+        }
+    }
+
+    &__progress-value {
+        stroke-linecap: round;
+        fill: none;
+        stroke: $secondary;
+        stroke-width: 5;
+        stroke-dasharray: 339.292;
+        stroke-dashoffset: 339.292;
+        transition: all 2s $bezier;
+        transition-delay: 0.5s;
+    }
+
+    &__progress {
+        transform: rotate(-90deg);
+        transform-origin: 58.5px 58.5px;
+        position: absolute;
+        top: -5px;
+        left: -6px;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+    }
+}

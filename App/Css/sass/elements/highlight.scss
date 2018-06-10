@@ -1,0 +1,119 @@
+﻿.highlight {
+    margin-bottom: 30px;
+
+    &__item {
+        padding: 30px 0 20px;
+        background: rgba($black,0.19);
+        text-align: left;
+        position: relative;
+        margin-bottom: 1px;
+
+        &--active {
+            background: -moz-linear-gradient(top, rgba(200,79,225,1) 0%, rgba(104,16,178,1) 100%);
+            background: -webkit-linear-gradient(top, rgba(200,79,225,1) 0%,rgba(104,16,178,1) 100%);
+            background: linear-gradient(to bottom, rgba(200,79,225,1) 0%,rgba(104,16,178,1) 100%);
+
+            .highlight-expand {
+                display: block;
+            }
+        }
+    }
+
+    &__left {
+        float: left;
+        width: 50%;
+    }
+
+    &__right {
+        float: right;
+        width: 50%;
+        text-align: right;
+    }
+
+    &__icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+        float: left;
+
+        .a {
+            fill: $white;
+        }
+    }
+
+    &__title {
+        font-size: $base + 2;
+        margin: 0;
+        position: relative;
+        top: -2px;
+    }
+
+    &__subtitle {
+        font-size: $base - 4;
+        display: block;
+        opacity: 0.6;
+    }
+}
+
+.highlight-expand {
+    position: relative;
+    z-index: 1;
+    top: 20px;
+    display: none;
+
+    &__item {
+        position: relative;
+        padding: 18px 0;
+        background: linear-gradient(to bottom, rgba(30,45,66,1) 0%,rgba(14,33,48,1) 100%);
+
+        &--active {
+            background: linear-gradient(to bottom, rgba(77,38,118,1) 0%,rgba(64,25,103,1) 100%);
+        }
+    }
+
+    &__link {
+        z-index: 4;
+        @include fill();
+    }
+
+    &__edit {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        margin-top: -7px;
+        display: inline-block;
+        width: 8px;
+        height: 15px;
+        opacity: 0.8;
+        transform: rotateZ(180deg);
+
+        .a {
+            fill: $white;
+        }
+    }
+
+    &__title {
+        display: block;
+        font-weight: bold;
+    }
+
+    &__detail {
+        margin-right: 30px;
+        display: inline-block;
+        font-size: $base - 2;
+    }
+
+    &__value {
+        font-size: $base - 4;
+    }
+}
+
+.expandable {
+    &__edit {
+        display: inline-block;
+        width: 8px;
+        height: 15px;
+        opacity: 0.8;
+        transform: rotateZ(180deg);
+    }
+}

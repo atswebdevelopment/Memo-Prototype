@@ -1,0 +1,41 @@
+﻿.overview {
+    background: rgba(#1D2A3E,0.4);
+    padding: 15px 0;
+
+    h2 {
+        float: left;
+        margin: 0;
+    }
+
+    &__content {
+        width: 100%;
+    }
+
+    &__item {
+        padding: 20px 0;
+    }
+}
+
+.user {
+    &__image {
+        width: 115px;
+        height: 115px;
+        border-radius: 50%;
+        border: 12px solid rgba($white,0.2);
+        margin: 0 auto 10px;
+
+        .icon {
+            width: 115px;
+            height: 115px;
+        }
+
+        .a {
+            opacity: 1;
+            fill: $white;
+        }
+
+        .b {
+            fill: $tertiary;
+        }
+    }
+}

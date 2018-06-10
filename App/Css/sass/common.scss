@@ -281,6 +281,37 @@ button.button--white {
     opacity:0.5;
 }
 
+.icons {
+    display: table;
+    width: 100%;
+    margin-bottom: 20px;
+
+    &__item {
+        display: table-cell;
+        text-align: center;
+
+        .b {
+            opacity: 0.37;
+        }
+    }
+
+    &__caption {
+        display: block;
+        font-weight: bold;
+    }
+}
+
+.partner {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    text-align: right;
+
+    img {
+        width: 50%;
+    }
+}
+
 .cloud {
     position: absolute;
     width: 225px;

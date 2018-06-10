@@ -1,0 +1,54 @@
+﻿.upload {
+    &__stage {
+        position: relative;
+        display: none;
+
+        &--stage-1 {
+            display: block;
+        }
+    }
+
+    &__links {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        width: 100%;
+    }
+
+    &__link {
+        @include clearlist();
+        display: block;
+
+        &:after {
+            content: "";
+            height: 1px;
+            width: 60px;
+            background: $white;
+            margin: 48px auto;
+            display: block;
+        }
+
+        &:last-child {
+            &:after {
+                content: none;
+            }
+        }
+
+        a {
+            text-decoration: none;
+        }
+    }
+
+    &__link-icon {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 10px;
+        display: block;
+    }
+
+    &__file-icon {
+        width: 136px;
+        margin: 50px auto;
+    }
+}

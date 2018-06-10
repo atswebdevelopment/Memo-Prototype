@@ -1,0 +1,41 @@
+﻿.popup {
+    background: $primary;
+    background: linear-gradient(to bottom, #f850ff 0%,#9728ae 50%,#36005d 100%);
+    @include fill();
+    position: fixed;
+    z-index: 5;
+    @include vertical();
+    overflow: auto;
+
+    &__content {
+        width: 90%;
+        padding: 34px 0;
+        position: relative;
+        z-index: 1;
+
+        .title {
+            font-size: $base + 12;
+            display: block;
+            font-weight: bold;
+            margin-bottom: 26px;
+            text-align: center;
+        }
+
+        p {
+            font-size: $base + 2;
+        }
+    }
+
+    &__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        z-index: 1;
+
+        img {
+            max-width: 200%;
+        }
+    }
+}
