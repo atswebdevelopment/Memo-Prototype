@@ -90,7 +90,10 @@
     <splash height="1920" src="res/screens/windows/SplashScreen.scale-240.png" width="1152" />
     <splash height="1920" src="res/screens/windows/SplashScreenPhone.scale-240.png" width="1152" />
   </platform>
-  <plugin name="cordova-plugin-camera" spec="~2.4.1" />
+  <plugin name="cordova-plugin-camera" spec="~2.4.1">
+    <param name="CAMERA_USAGE_DESCRIPTION" value="We are using the Camera for something..." />
+    <param name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="We are using the Photo Library for something..." />
+  </plugin>
   <plugin name="cordova-plugin-file" spec="~5.0.0" />
   <plugin name="cordova-plugin-file-transfer" spec="~1.7.1" />
   <preference name="android-minSdkVersion" value="15" />
