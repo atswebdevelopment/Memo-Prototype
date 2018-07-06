@@ -57,7 +57,7 @@ var fingerprint = {
                 else {
                     $('form.userPin legend').html('Fingerprint iOS...');
                     window.plugins.touchid.isAvailable(
-                        function(type) {$('form.userPin legend').html('Fingerprint iOS...');},
+                        function(type) {$('form.userPin legend').html('Fingerprint Available...');},
                         function(msg) {$('form.userPin legend').html(msg);}
                     );
                     //window.plugins.touchid.isAvailable(fingerprint.isAvailableSuccess, fingerprint.isAvailableError);
