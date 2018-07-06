@@ -56,7 +56,11 @@ var fingerprint = {
                 //iOS
                 else {
                     $('form.userPin legend').html('Fingerprint iOS...');
-                    window.plugins.touchid.isAvailable(fingerprint.isAvailableSuccess, fingerprint.isAvailableError);
+                    window.plugins.touchid.isAvailable(
+                        function(type) {$('form.userPin legend').html('Fingerprint iOS...');},
+                        function(msg) {$('form.userPin legend').html(msg);}
+                    );
+                    //window.plugins.touchid.isAvailable(fingerprint.isAvailableSuccess, fingerprint.isAvailableError);
                 }
             }
         });
@@ -105,6 +109,7 @@ var fingerprint = {
         }
     },
     isAvailableError: function (message) {
+        $('form.userPin legend').html('Fingerprint unavailable...');
         console.log("isAvailableError(): " + message);
     },
     encryptSuccessCallback: function (result) {
