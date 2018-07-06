@@ -168,7 +168,6 @@
         }
 
         function createAuthorizationHeader(xhr) {
-            var outputLogs = '';
             var header = xhr.getResponseHeader(DigestAjax.WWW_AUTHENTICATE);
             if (header !== undefined && header !== null) {
                 var params = parseWWWAuthenticateHeader(header);
@@ -218,7 +217,6 @@
                     ha2 = CryptoJS.MD5(s.type + ':' + s.requestUri + ':' + CryptoJS.MD5(body));
                 }
                 else {
-                    outputLogs += s.type + '<br />' + s.requestUri;
                     console.log(s.type);
                     console.log(s.requestUri);
                     ha2 = CryptoJS.MD5(s.type + ':' + s.requestUri);
@@ -242,8 +240,6 @@
                     console.log(cnonce);
                     console.log(clientQop);
                     console.log(ha2);
-                    outputLogs +=  '<br />' + ha1 + '<br />' + params.nonce + '<br />' + nc + '<br />' + cnonce + '<br />' + clientQop + '<br />' + ha2;
-                    $('form.userPin p').css({'text-align':'left'}).html(outputLogs);
                     response = CryptoJS.MD5(ha1 + ':' + params.nonce + ':'
                         + nc + ':' + cnonce + ':' + clientQop + ':' + ha2);
                 }
