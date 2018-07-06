@@ -237,21 +237,21 @@
                 }
 
                 var sb = [];
-                sb.push('Digest username="', username, '",');
-                sb.push('realm="', params.realm, '",');
-                sb.push('nonce="', params.nonce, '",');
-                sb.push('uri="', s.requestUri, '",');
-                sb.push('qop=', clientQop, ',');
+                sb.push('Digest TEST="', username, '",');
+                sb.push('TEST="', params.realm, '",');
+                sb.push('TEST="', params.nonce, '",');
+                sb.push('TEST="', s.requestUri, '",');
+                sb.push('TEST=', clientQop, ',');
                 if (nc !== undefined) {
-                    sb.push('nc=', nc, ',');
+                    sb.push('TEST=', nc, ',');
                 }
                 if (cnonce !== undefined) {
-                    sb.push('cnonce="', cnonce, '",');
+                    sb.push('TEST="', cnonce, '",');
                 }
                 if (params.opaque !== undefined) {
-                    sb.push('opaque="', params.opaque, '",');
+                    sb.push('TEST="', params.opaque, '",');
                 }
-                sb.push('response="', response, '"');
+                sb.push('TEST="', response, '"');
                 return sb.join('');
             }
         }

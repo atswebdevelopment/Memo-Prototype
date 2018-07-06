@@ -212,15 +212,24 @@ var global = {
                 type: 'GET'
             });
         },
-        postForm: function (action, method, data, transport) {
+        postForm: function (action, method, data, transport, auth) {
             var ajaxData = {
                 url: global.api_endpoint + action,
                 type: method,
                 context: document.body
             };
+
             var headers = {
                 'X-Api-Key' : global.api_key
             };
+
+            if( auth ) {
+                headers = $.extend( headers, {
+                    'Username' : appData.store.getItem('userEmail'),
+                    'Key' : appData.store.getItem('userKey')
+                });
+            }
+
             if( transport === 'headers') {
                 //Send data in headers rather than as separate payload
                 headers = $.extend( headers, data );
@@ -230,9 +239,12 @@ var global = {
                     'data' : data
                 });
             }
+
             ajaxData = $.extend( ajaxData, {
                 'headers' : headers
             });
+
+            console.log( headers );
             return $.ajax(ajaxData);
         },
         postFile: function (data, method) {
@@ -245,24 +257,5 @@ var global = {
                 data: data
             });
         },
-        getDigest: function (action, params) {
-            var url = global.api_endpoint + action;
-            if( typeof params !== "undefined" && params !== null ) {
-                url += params;
-            }
-            return $.getDigest(url, {
-                headers : {
-                    'x-api-key': global.api_key
-                }
-            }, appData.getItem('userName'), appData.getItem('userKey'));
-        },
-        putDigest: function (action, method, data) {
-            return $.putDigest(global.api_endpoint + action, {
-                data : data,
-                headers : {
-                    'x-api-key': global.api_key
-                }
-            }, appData.getItem('userName'), appData.getItem('userKey'));
-        }
     }
 };

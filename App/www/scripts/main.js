@@ -256,35 +256,26 @@ var forms = {
                     transport = 'headers';
                 }
 
-                if (form.hasClass('formAuth')) {
-                    //Bypass digest auth
-                    var post = global.models.postForm;
-
-                    if (form.attr('data-file') === 'true') {
-                        data = formData;
-                        post = global.models.postFile;
-                    }
-
-                    post(form.attr('data-action'), form.attr('data-method'), data, transport).success(function (data) {
-                        console.log(data);
-                        forms.controller(data, form);
-                    }).fail(function (data) {
-                        console.log(data);
-                        form.find('.error-text').show();
-                        form.removeClass('form--loading');
-                    });
-                } else {
-                    //Use digest auth
-                    var digest = global.models.putDigest;
-
-                    digest(form.attr('data-action'), form.attr('data-method'), data).done(function (data) {
-                        forms.controller(data, form);
-                    }).fail(function (data) {
-                        console.log('n');
-                        form.find('.error-text').show();
-                        form.removeClass('form--loading');
-                    });
+                var api_auth = true;
+                if (form.hasClass('noAuth')) {
+                    //Bypass auth
+                    api_auth = false;
                 }
+
+                var post = global.models.postForm;
+                if (form.attr('data-file') === 'true') {
+                    data = formData;
+                    post = global.models.postFile;
+                }
+                post(form.attr('data-action'), form.attr('data-method'), data, transport, api_auth)
+                    .done(function (data) {
+                        console.log(data);
+                        forms.controller(data, form);
+                    }).fail(function (data) {
+                        console.log(data);
+                        form.find('.error-text').show();
+                        form.removeClass('form--loading');
+                    });
             }
             catch (ex) {
                 console.log(ex);
@@ -347,8 +338,7 @@ var forms = {
 
         //Pin form
         if (form.hasClass('userPin')) {
-            form.removeClass('form--loading').removeClass('form--complete');
-            //document.location.replace('dashboard.html');
+            document.location.replace('dashboard.html');
         }
         //end
     },
@@ -655,15 +645,24 @@ var global = {
                 type: 'GET'
             });
         },
-        postForm: function (action, method, data, transport) {
+        postForm: function (action, method, data, transport, auth) {
             var ajaxData = {
                 url: global.api_endpoint + action,
                 type: method,
                 context: document.body
             };
+
             var headers = {
                 'X-Api-Key' : global.api_key
             };
+
+            if( auth ) {
+                headers = $.extend( headers, {
+                    'Username' : appData.store.getItem('userEmail'),
+                    'Key' : appData.store.getItem('userKey')
+                });
+            }
+
             if( transport === 'headers') {
                 //Send data in headers rather than as separate payload
                 headers = $.extend( headers, data );
@@ -673,9 +672,12 @@ var global = {
                     'data' : data
                 });
             }
+
             ajaxData = $.extend( ajaxData, {
                 'headers' : headers
             });
+
+            console.log( headers );
             return $.ajax(ajaxData);
         },
         postFile: function (data, method) {
@@ -688,25 +690,6 @@ var global = {
                 data: data
             });
         },
-        getDigest: function (action, params) {
-            var url = global.api_endpoint + action;
-            if( typeof params !== "undefined" && params !== null ) {
-                url += params;
-            }
-            return $.getDigest(url, {
-                headers : {
-                    'x-api-key': global.api_key
-                }
-            }, appData.getItem('userName'), appData.getItem('userKey'));
-        },
-        putDigest: function (action, method, data) {
-            return $.putDigest(global.api_endpoint + action, {
-                data : data,
-                headers : {
-                    'x-api-key': global.api_key
-                }
-            }, appData.getItem('userName'), appData.getItem('userKey'));
-        }
     }
 };
 /*

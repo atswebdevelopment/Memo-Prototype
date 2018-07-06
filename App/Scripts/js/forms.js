@@ -92,35 +92,26 @@ var forms = {
                     transport = 'headers';
                 }
 
-                if (form.hasClass('formAuth')) {
-                    //Bypass digest auth
-                    var post = global.models.postForm;
-
-                    if (form.attr('data-file') === 'true') {
-                        data = formData;
-                        post = global.models.postFile;
-                    }
-
-                    post(form.attr('data-action'), form.attr('data-method'), data, transport).success(function (data) {
-                        console.log(data);
-                        forms.controller(data, form);
-                    }).fail(function (data) {
-                        console.log(data);
-                        form.find('.error-text').show();
-                        form.removeClass('form--loading');
-                    });
-                } else {
-                    //Use digest auth
-                    var digest = global.models.putDigest;
-
-                    digest(form.attr('data-action'), form.attr('data-method'), data).done(function (data) {
-                        forms.controller(data, form);
-                    }).fail(function (data) {
-                        console.log('n');
-                        form.find('.error-text').show();
-                        form.removeClass('form--loading');
-                    });
+                var api_auth = true;
+                if (form.hasClass('noAuth')) {
+                    //Bypass auth
+                    api_auth = false;
                 }
+
+                var post = global.models.postForm;
+                if (form.attr('data-file') === 'true') {
+                    data = formData;
+                    post = global.models.postFile;
+                }
+                post(form.attr('data-action'), form.attr('data-method'), data, transport, api_auth)
+                    .done(function (data) {
+                        console.log(data);
+                        forms.controller(data, form);
+                    }).fail(function (data) {
+                        console.log(data);
+                        form.find('.error-text').show();
+                        form.removeClass('form--loading');
+                    });
             }
             catch (ex) {
                 console.log(ex);
@@ -183,8 +174,7 @@ var forms = {
 
         //Pin form
         if (form.hasClass('userPin')) {
-            form.removeClass('form--loading').removeClass('form--complete');
-            //document.location.replace('dashboard.html');
+            document.location.replace('dashboard.html');
         }
         //end
     },

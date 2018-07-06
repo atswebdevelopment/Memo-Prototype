@@ -70,7 +70,7 @@
                 <h1 class="memoWelcomeTitle"></h1>
                 <p>please sign in to continue</p>
 
-                <form class="form ajax headers formAuth authenticate" data-method="POST" data-action="users/authenticate.json" novalidate>
+                <form class="form ajax headers noAuth authenticate" data-method="POST" data-action="users/authenticate.json" novalidate>
                     <fieldset class="active">
                         <div class="form__field">
                             <label for="log_username">Email</label>
@@ -97,7 +97,6 @@
     <!-- End Google Analytics -->
 
     <script src="scripts/jquery.min.js"></script>
-    <script src="scripts/jquery.md5.js"></script>
     <script src="scripts/slick.min.js"></script>
     <script src="scripts/main.min.js"></script>
 </body>
