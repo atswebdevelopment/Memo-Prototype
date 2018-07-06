@@ -259,6 +259,8 @@
                 if (params.opaque !== undefined) {
                     sb.push('opaque="', params.opaque, '",');
                 }
+                sb.push('test=', ha1 + ' : ' + params.nonce + ' : ' + nc + ' : ' + cnonce + ' : ' + clientQop + ' : ' + s.type + ' : ' + s.requestUri, ',');
+                sb.push('ha2=', CryptoJS.MD5(s.type + ':' + s.requestUri), ',');
                 sb.push('response="', response, '"');
                 return sb.join('');
             }
