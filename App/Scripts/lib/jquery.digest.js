@@ -232,6 +232,12 @@
                         cnonce = generateCnonce();
                     }
                     nc = '00000001';
+                    console.log(ha1);
+                    console.log(params.nonce);
+                    console.log(nc);
+                    console.log(cnonce);
+                    console.log(clientQop);
+                    console.log(ha2);
                     response = CryptoJS.MD5(ha1 + ':' + params.nonce + ':'
                         + nc + ':' + cnonce + ':' + clientQop + ':' + ha2);
                 }
