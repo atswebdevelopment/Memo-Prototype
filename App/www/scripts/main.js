@@ -347,7 +347,8 @@ var forms = {
 
         //Pin form
         if (form.hasClass('userPin')) {
-            document.location.replace('dashboard.html');
+            form.removeClass('form--loading').removeClass('form--complete');
+            //document.location.replace('dashboard.html');
         }
         //end
     },
