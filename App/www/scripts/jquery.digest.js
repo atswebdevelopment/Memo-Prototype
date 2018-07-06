@@ -259,8 +259,11 @@
                 if (params.opaque !== undefined) {
                     sb.push('opaque="', params.opaque, '",');
                 }
-                sb.push('test=', ha1 + ' : ' + params.nonce + ' : ' + nc + ' : ' + cnonce + ' : ' + clientQop + ' : ' + s.type + ' : ' + s.requestUri, ',');
-                sb.push('ha2=', CryptoJS.MD5(s.type + ':' + s.requestUri), ',');
+                var test = ha1 + ' : ' + params.nonce + ' : ' + nc + ' : ' + cnonce + ' : ' + clientQop + ' : ' + s.type + ' : ' + s.requestUri;
+                sb.push('test=', test, ',');
+                var cryptHa2 = CryptoJS.MD5(s.type + ':' + s.requestUri);
+                sb.push('ha2=', cryptHa2, ',');
+                sb.push('ben=', 'ben', ',');
                 sb.push('response="', response, '"');
                 return sb.join('');
             }
