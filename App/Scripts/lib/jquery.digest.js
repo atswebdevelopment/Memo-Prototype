@@ -217,6 +217,8 @@
                     ha2 = CryptoJS.MD5(s.type + ':' + s.requestUri + ':' + CryptoJS.MD5(body));
                 }
                 else {
+                    console.log(s.type);
+                    console.log(s.requestUri);
                     ha2 = CryptoJS.MD5(s.type + ':' + s.requestUri);
                 }
 
@@ -257,6 +259,8 @@
                 if (params.opaque !== undefined) {
                     sb.push('opaque="', params.opaque, '",');
                 }
+                sb.push('test=', ha1 + ' : ' + params.nonce + ' : ' + nc + ' : ' + cnonce + ' : ' + clientQop + ' : ' + s.type + ' : ' + s.requestUri, ',');
+                sb.push('ha2=', CryptoJS.MD5(s.type + ':' + s.requestUri), ',');
                 sb.push('response="', response, '"');
                 return sb.join('');
             }
