@@ -126,7 +126,6 @@
         function doAjaxUnauthorized() {
             //If the request is successful, invoke callbacks immediately
             //without using Digest authentication
-
             return $.ajax(s)
                 .done(function(data, textStatus, jqXHR) {
                     dfd.resolve(data, textStatus, jqXHR);
@@ -169,7 +168,6 @@
         }
 
         function createAuthorizationHeader(xhr) {
-            console.log('createAuthorizationHeader');
             var header = xhr.getResponseHeader(DigestAjax.WWW_AUTHENTICATE);
             if (header !== undefined && header !== null) {
                 var params = parseWWWAuthenticateHeader(header);
@@ -219,8 +217,6 @@
                     ha2 = CryptoJS.MD5(s.type + ':' + s.requestUri + ':' + CryptoJS.MD5(body));
                 }
                 else {
-                    console.log(s.type);
-                    console.log(s.requestUri);
                     ha2 = CryptoJS.MD5(s.type + ':' + s.requestUri);
                 }
 
@@ -236,22 +232,27 @@
                         cnonce = generateCnonce();
                     }
                     nc = '00000001';
-                    console.log(ha1);
-                    console.log(params.nonce);
-                    console.log(nc);
-                    console.log(cnonce);
-                    console.log(clientQop);
-                    console.log(ha2);
                     response = CryptoJS.MD5(ha1 + ':' + params.nonce + ':'
                         + nc + ':' + cnonce + ':' + clientQop + ':' + ha2);
                 }
 
                 var sb = [];
                 sb.push('Digest username="', username, '",');
-                sb.push('realm="', params.realm, '"');
-                var headers = sb.join('');
-                console.log(headers);
-                return headers;
+                sb.push('realm="', params.realm, '",');
+                sb.push('nonce="', params.nonce, '",');
+                sb.push('uri="', s.requestUri, '",');
+                sb.push('qop=', clientQop, ',');
+                if (nc !== undefined) {
+                    sb.push('nc=', nc, ',');
+                }
+                if (cnonce !== undefined) {
+                    sb.push('cnonce="', cnonce, '",');
+                }
+                if (params.opaque !== undefined) {
+                    sb.push('opaque="', params.opaque, '",');
+                }
+                sb.push('response="', response, '"');
+                return sb.join('');
             }
         }
         function parseWWWAuthenticateHeader(header) {
