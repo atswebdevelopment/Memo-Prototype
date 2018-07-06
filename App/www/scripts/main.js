@@ -6,8 +6,12 @@
 
 var appData = {
     store: window.localStorage,
+
     init: function () {
-        appData.get = global.models.getData;
+        appData.get = global.models.getDigest;
+    },
+    getItem: function(name) {
+        return appData.store.getItem(name);
     },
     setWelcomeStatus: function (data) {
         appData.store.setItem('welcomeStatus', data);
@@ -17,6 +21,12 @@ var appData = {
     },
     setUserName: function (data) {
         appData.store.setItem('userName', data);
+    },
+    setUserKey: function (data) {
+        appData.store.setItem('userKey', data);
+    },
+    setUserApiUrl: function (data) {
+        appData.store.setItem('userApiUrl', data);
     },
     setReturnUser: function () {
 
@@ -34,14 +44,18 @@ var appData = {
 var fingerprint = {
     clientId: "Memo",
     init: function () {
+        $('form.userPin legend').html('Fingerprint init...');
         $('body').on('change', '.fingerprint-auth input', function () {
+            $('form.userPin legend').html('Fingerprint change...');
             if ($(this).val() === 'on') {
+                $('form.userPin legend').html('Fingerprint change...');
                 //Android
                 if (global.device === 'Android') {
                     FingerprintAuth.isAvailable(fingerprint.isAvailableSuccess, fingerprint.isAvailableError);
                 }
                 //iOS
                 else {
+                    $('form.userPin legend').html('Fingerprint iOS...');
                     window.plugins.touchid.isAvailable(fingerprint.isAvailableSuccess, fingerprint.isAvailableError);
                 }
             }
@@ -70,6 +84,7 @@ var fingerprint = {
         }
     },
     isAvailableSuccess: function (result) {
+        $('form.userPin legend').html('Fingerprint available...');
         //Android
         if (global.device === 'Android') {
             if (result.isAvailable) {
@@ -85,6 +100,7 @@ var fingerprint = {
         }
         //iOS
         else {
+            $('form.userPin legend').html('Fingerprint available iOS...');
             window.plugins.touchid.verifyFingerprint('Scan your fingerprint please', fingerprint.encryptSuccessCallback, fingerprint.encryptErrorCallback);
         }
     },
@@ -150,7 +166,7 @@ var fingerprint = {
 var forms = {
     init: function () {
         $('.select select').bind('change', function () {
-            $(this).prev().text($(this).find('option:selected').val());
+            $(this).prev().text($(this).find('option:selected').text());
             if ($(this).val() === '') {
                 $(this).parent().removeClass('active');
             }
@@ -226,26 +242,44 @@ var forms = {
             }
 
             form.find('.error-text').hide();
-
             form.addClass('form--loading');
 
             try {
-                var data = form.serialize();
-                var post = global.models.postForm;
-
-                if (form.attr('data-file') === 'true') {
-                    data = formData;
-                    post = global.models.postFile;
+                var data = form.serializeObject();
+                var transport = 'data';
+                if (form.hasClass('headers')) {
+                    transport = 'headers';
                 }
 
-                post(data, form.attr('data-method')).success(function (data) {
-                    console.log(data);
-                    forms.controller(data, form);
-                }).fail(function (data) {
-                    console.log(data);
-                    form.find('.error-text').show();
-                    form.removeClass('form--loading');
-                });
+                if (form.hasClass('formAuth')) {
+                    //Bypass digest auth
+                    var post = global.models.postForm;
+
+                    if (form.attr('data-file') === 'true') {
+                        data = formData;
+                        post = global.models.postFile;
+                    }
+
+                    post(form.attr('data-action'), form.attr('data-method'), data, transport).success(function (data) {
+                        console.log(data);
+                        forms.controller(data, form);
+                    }).fail(function (data) {
+                        console.log(data);
+                        form.find('.error-text').show();
+                        form.removeClass('form--loading');
+                    });
+                } else {
+                    //Use digest auth
+                    var digest = global.models.putDigest;
+
+                    digest(form.attr('data-action'), form.attr('data-method'), data).done(function (data) {
+                        forms.controller(data, form);
+                    }).fail(function (data) {
+                        console.log('n');
+                        form.find('.error-text').show();
+                        form.removeClass('form--loading');
+                    });
+                }
             }
             catch (ex) {
                 console.log(ex);
@@ -269,41 +303,45 @@ var forms = {
 
         form.removeClass('form--loading');
 
-        if (data === "900") {
+        if (data.status === "SUCCESS") {
             form.addClass('form--complete');
         }
         else {
             //error handling for form
-            if (data === "905") {
-                errorTag.html('There was an unknown internal model issue when processing your form. Please contact technical support.');
-            }
-            if (data === "901") {
-                errorTag.html('That email address is already registered. Please go back and try a new one.');
-            }
-            else {
-                errorTag.html(data);
-            }
+            console.log(data.status);
+            errorTag.html(data.status);
             return false;
         }
 
         //Login form
-        if (form.attr('data-method') === 'PostLogin') {
-            appData.setUserEmail(form.find('.getUserEmailField').val());
+        if (form.hasClass('authenticate')) {
             appData.setWelcomeStatus('loggedin');
+            //Set our global API user variables
+            appData.setUserEmail(form.find('.getUserEmailField').val());
+            appData.setUserName(data.user.email);
+            appData.setUserKey(data.user.digest_hash);
+            appData.setUserApiUrl('users/' + data.user.id + '.json');
             document.location.replace('dashboard.html');
         }
         //end
 
         //Register form
-        if (form.attr('data-method') === 'PostRegister') {
+        if (form.hasClass('userRegister')) {
             $('.register--active').removeClass('register--active').next().addClass('register--active').find('fieldset').eq(0).addClass('active');
-            appData.setUserEmail(form.find('.getUserEmailField').val());
             $('.setUserEmailField').val($('.getUserEmailField').val());
+            //Set our global API user variables
+            appData.setUserEmail(form.find('.getUserEmailField').val());
+            appData.setUserName(data.user.email);
+            appData.setUserKey(data.user.digest_hash);
+            var user_api_url = 'users/' + data.user.id + '.json';
+            appData.setUserApiUrl('users/' + data.user.id + '.json');
+            //Now that we know our user, we can determine the API URL for a user edit
+            $('form.userPin').attr('data-action', user_api_url);
         }
         //end
 
         //Pin form
-        if (form.attr('data-method') === 'PostPin') {
+        if (form.hasClass('userPin')) {
             document.location.replace('dashboard.html');
         }
         //end
@@ -377,6 +415,26 @@ var forms = {
         return re.test(val);
     }
 };
+
+(function($,undefined){
+    '$:nomunge'; // Used by YUI compressor.
+
+    $.fn.serializeObject = function(){
+        var obj = {};
+
+        $.each( this.serializeArray(), function(i,o){
+            var n = o.name,
+                v = o.value;
+
+            obj[n] = obj[n] === undefined ? v
+                : $.isArray( obj[n] ) ? obj[n].concat( v )
+                    : [ obj[n], v ];
+        });
+
+        return obj;
+    };
+
+})(jQuery);
 /*
 * Title: Main JS
 * Author: Adam Southorn
@@ -384,6 +442,9 @@ var forms = {
 */
 
 var global = {
+    api_key : 'YTdqEC}p`H&GfnST{tGD#g7h?%mZ`[',
+    api_endpoint : 'http://lifesbackup.com/api/',
+
     init: function () {
         global.ux();
         global.ui();
@@ -588,13 +649,28 @@ var global = {
                 type: 'GET'
             });
         },
-        postForm: function (data, method) {
-            return $.ajax({
-                url: 'http://memo.jabberwokie.com/umbraco/api/MemoAppApi/' + method,
-                type: 'POST',
-                context: document.body,
-                data: data
+        postForm: function (action, method, data, transport) {
+            var ajaxData = {
+                url: global.api_endpoint + action,
+                type: method,
+                context: document.body
+            };
+            var headers = {
+                'X-Api-Key' : global.api_key
+            };
+            if( transport === 'headers') {
+                //Send data in headers rather than as separate payload
+                headers = $.extend( headers, data );
+            } else {
+                //Send data as normal payload
+                ajaxData = $.extend( ajaxData, {
+                    'data' : data
+                });
+            }
+            ajaxData = $.extend( ajaxData, {
+                'headers' : headers
             });
+            return $.ajax(ajaxData);
         },
         postFile: function (data, method) {
             return $.ajax({
@@ -605,6 +681,25 @@ var global = {
                 context: document.body,
                 data: data
             });
+        },
+        getDigest: function (action, params) {
+            var url = global.api_endpoint + action;
+            if( typeof params !== "undefined" && params !== null ) {
+                url += params;
+            }
+            return $.getDigest(url, {
+                headers : {
+                    'x-api-key': global.api_key
+                }
+            }, appData.getItem('userName'), appData.getItem('userKey'));
+        },
+        putDigest: function (action, method, data) {
+            return $.putDigest(global.api_endpoint + action, {
+                data : data,
+                headers : {
+                    'x-api-key': global.api_key
+                }
+            }, appData.getItem('userName'), appData.getItem('userKey'));
         }
     }
 };
@@ -647,7 +742,7 @@ var pages = {
     },
     dashboard: function () {
         //Set logged in user name
-        appData.get('GetUserName', '?email=' + appData.store.getItem('userEmail')).success(function (data) {
+        appData.get(appData.getItem('userApiUrl'), null).success(function (data) {
             appData.setUserName(data);
 
             //Dashboard html

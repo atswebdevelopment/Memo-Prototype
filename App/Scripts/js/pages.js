@@ -37,7 +37,7 @@ var pages = {
     },
     dashboard: function () {
         //Set logged in user name
-        appData.get('GetUserName', '?email=' + appData.store.getItem('userEmail')).success(function (data) {
+        appData.get(appData.getItem('userApiUrl'), null).success(function (data) {
             appData.setUserName(data);
 
             //Dashboard html

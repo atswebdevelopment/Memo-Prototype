@@ -5,6 +5,9 @@
 */
 
 var global = {
+    api_key : 'YTdqEC}p`H&GfnST{tGD#g7h?%mZ`[',
+    api_endpoint : 'http://lifesbackup.com/api/',
+
     init: function () {
         global.ux();
         global.ui();
@@ -209,13 +212,28 @@ var global = {
                 type: 'GET'
             });
         },
-        postForm: function (data, method) {
-            return $.ajax({
-                url: 'http://memo.jabberwokie.com/umbraco/api/MemoAppApi/' + method,
-                type: 'POST',
-                context: document.body,
-                data: data
+        postForm: function (action, method, data, transport) {
+            var ajaxData = {
+                url: global.api_endpoint + action,
+                type: method,
+                context: document.body
+            };
+            var headers = {
+                'X-Api-Key' : global.api_key
+            };
+            if( transport === 'headers') {
+                //Send data in headers rather than as separate payload
+                headers = $.extend( headers, data );
+            } else {
+                //Send data as normal payload
+                ajaxData = $.extend( ajaxData, {
+                    'data' : data
+                });
+            }
+            ajaxData = $.extend( ajaxData, {
+                'headers' : headers
             });
+            return $.ajax(ajaxData);
         },
         postFile: function (data, method) {
             return $.ajax({
@@ -226,6 +244,25 @@ var global = {
                 context: document.body,
                 data: data
             });
+        },
+        getDigest: function (action, params) {
+            var url = global.api_endpoint + action;
+            if( typeof params !== "undefined" && params !== null ) {
+                url += params;
+            }
+            return $.getDigest(url, {
+                headers : {
+                    'x-api-key': global.api_key
+                }
+            }, appData.getItem('userName'), appData.getItem('userKey'));
+        },
+        putDigest: function (action, method, data) {
+            return $.putDigest(global.api_endpoint + action, {
+                data : data,
+                headers : {
+                    'x-api-key': global.api_key
+                }
+            }, appData.getItem('userName'), appData.getItem('userKey'));
         }
     }
 };

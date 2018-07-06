@@ -7,7 +7,7 @@
 var forms = {
     init: function () {
         $('.select select').bind('change', function () {
-            $(this).prev().text($(this).find('option:selected').val());
+            $(this).prev().text($(this).find('option:selected').text());
             if ($(this).val() === '') {
                 $(this).parent().removeClass('active');
             }
@@ -83,26 +83,44 @@ var forms = {
             }
 
             form.find('.error-text').hide();
-
             form.addClass('form--loading');
 
             try {
-                var data = form.serialize();
-                var post = global.models.postForm;
-
-                if (form.attr('data-file') === 'true') {
-                    data = formData;
-                    post = global.models.postFile;
+                var data = form.serializeObject();
+                var transport = 'data';
+                if (form.hasClass('headers')) {
+                    transport = 'headers';
                 }
 
-                post(data, form.attr('data-method')).success(function (data) {
-                    console.log(data);
-                    forms.controller(data, form);
-                }).fail(function (data) {
-                    console.log(data);
-                    form.find('.error-text').show();
-                    form.removeClass('form--loading');
-                });
+                if (form.hasClass('formAuth')) {
+                    //Bypass digest auth
+                    var post = global.models.postForm;
+
+                    if (form.attr('data-file') === 'true') {
+                        data = formData;
+                        post = global.models.postFile;
+                    }
+
+                    post(form.attr('data-action'), form.attr('data-method'), data, transport).success(function (data) {
+                        console.log(data);
+                        forms.controller(data, form);
+                    }).fail(function (data) {
+                        console.log(data);
+                        form.find('.error-text').show();
+                        form.removeClass('form--loading');
+                    });
+                } else {
+                    //Use digest auth
+                    var digest = global.models.putDigest;
+
+                    digest(form.attr('data-action'), form.attr('data-method'), data).done(function (data) {
+                        forms.controller(data, form);
+                    }).fail(function (data) {
+                        console.log('n');
+                        form.find('.error-text').show();
+                        form.removeClass('form--loading');
+                    });
+                }
             }
             catch (ex) {
                 console.log(ex);
@@ -126,41 +144,45 @@ var forms = {
 
         form.removeClass('form--loading');
 
-        if (data === "900") {
+        if (data.status === "SUCCESS") {
             form.addClass('form--complete');
         }
         else {
             //error handling for form
-            if (data === "905") {
-                errorTag.html('There was an unknown internal model issue when processing your form. Please contact technical support.');
-            }
-            if (data === "901") {
-                errorTag.html('That email address is already registered. Please go back and try a new one.');
-            }
-            else {
-                errorTag.html(data);
-            }
+            console.log(data.status);
+            errorTag.html(data.status);
             return false;
         }
 
         //Login form
-        if (form.attr('data-method') === 'PostLogin') {
-            appData.setUserEmail(form.find('.getUserEmailField').val());
+        if (form.hasClass('authenticate')) {
             appData.setWelcomeStatus('loggedin');
+            //Set our global API user variables
+            appData.setUserEmail(form.find('.getUserEmailField').val());
+            appData.setUserName(data.user.email);
+            appData.setUserKey(data.user.digest_hash);
+            appData.setUserApiUrl('users/' + data.user.id + '.json');
             document.location.replace('dashboard.html');
         }
         //end
 
         //Register form
-        if (form.attr('data-method') === 'PostRegister') {
+        if (form.hasClass('userRegister')) {
             $('.register--active').removeClass('register--active').next().addClass('register--active').find('fieldset').eq(0).addClass('active');
-            appData.setUserEmail(form.find('.getUserEmailField').val());
             $('.setUserEmailField').val($('.getUserEmailField').val());
+            //Set our global API user variables
+            appData.setUserEmail(form.find('.getUserEmailField').val());
+            appData.setUserName(data.user.email);
+            appData.setUserKey(data.user.digest_hash);
+            var user_api_url = 'users/' + data.user.id + '.json';
+            appData.setUserApiUrl('users/' + data.user.id + '.json');
+            //Now that we know our user, we can determine the API URL for a user edit
+            $('form.userPin').attr('data-action', user_api_url);
         }
         //end
 
         //Pin form
-        if (form.attr('data-method') === 'PostPin') {
+        if (form.hasClass('userPin')) {
             document.location.replace('dashboard.html');
         }
         //end
@@ -234,3 +256,23 @@ var forms = {
         return re.test(val);
     }
 };
+
+(function($,undefined){
+    '$:nomunge'; // Used by YUI compressor.
+
+    $.fn.serializeObject = function(){
+        var obj = {};
+
+        $.each( this.serializeArray(), function(i,o){
+            var n = o.name,
+                v = o.value;
+
+            obj[n] = obj[n] === undefined ? v
+                : $.isArray( obj[n] ) ? obj[n].concat( v )
+                    : [ obj[n], v ];
+        });
+
+        return obj;
+    };
+
+})(jQuery);

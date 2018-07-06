@@ -3,13 +3,6 @@ This file in the main entry point for defining grunt tasks and using grunt plugi
 Click here to learn more. http://go.microsoft.com/fwlink/?LinkID=513275&clcid=0x409
 */
 module.exports = function (grunt) {
-    grunt.loadNpmTasks("grunt-bower-task");
-    grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.loadNpmTasks("grunt-contrib-sass");
-    grunt.loadNpmTasks("grunt-contrib-jshint");
-    grunt.loadNpmTasks("grunt-contrib-concat");
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-
     grunt.initConfig({
         sass: {
             web: {
@@ -29,7 +22,7 @@ module.exports = function (grunt) {
                 eqeqeq: true,
                 globals: {
                     jQuery: true
-                },
+                }
             },
             files: {
                 src: [
@@ -40,7 +33,7 @@ module.exports = function (grunt) {
         concat: {
             web: {
                 src: ["scripts/js/*.js"],
-                dest: "www/scripts/main.js",
+                dest: "www/scripts/main.js"
             }
         },
         uglify: {
@@ -60,4 +53,12 @@ module.exports = function (grunt) {
             }
         }
     });
+
+    grunt.loadNpmTasks("grunt-bower-task");
+    grunt.loadNpmTasks("grunt-contrib-watch");
+    grunt.loadNpmTasks("grunt-contrib-sass");
+    grunt.loadNpmTasks("grunt-contrib-jshint");
+    grunt.loadNpmTasks("grunt-contrib-concat");
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.registerTask('default', ['watch']);
 };

@@ -70,15 +70,15 @@
                 <h1 class="memoWelcomeTitle"></h1>
                 <p>please sign in to continue</p>
 
-                <form class="form ajax" data-method="PostLogin" novalidate>
+                <form class="form ajax headers formAuth authenticate" data-method="POST" data-action="users/authenticate.json" novalidate>
                     <fieldset class="active">
                         <div class="form__field">
                             <label for="log_username">Email</label>
-                            <input type="email" name="email" id="log_email" class="required email getUserEmailField" />
+                            <input type="email" name="X-Username" id="log_email" class="required email getUserEmailField" />
                         </div>
                         <div class="form__field">
                             <label for="log_password">Password</label>
-                            <input type="password" name="password" id="log_password" class="required" />
+                            <input type="password" name="X-User-Key" id="log_password" class="required" />
                         </div>
                         <div class="form__field form__field--button">
                             <button class="button" type="submit">Submit</button>
@@ -97,6 +97,7 @@
     <!-- End Google Analytics -->
 
     <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/jquery.md5.js"></script>
     <script src="scripts/slick.min.js"></script>
     <script src="scripts/main.min.js"></script>
 </body>

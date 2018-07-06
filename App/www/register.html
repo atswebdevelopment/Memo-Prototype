@@ -33,17 +33,17 @@
                 <div class="form-errors">
                     <p></p>
                 </div>
-                <form class="form ajax form--slide" data-method="PostRegister" novalidate>
+                <form class="form ajax form--slide userRegister formAuth" data-method="POST" data-action="users.json" novalidate>
                     <fieldset class="active">
                         <legend>a little about you</legend>
                         <div class="form__field form__field--narrow">
                             <label for="reg_firstName">First name</label>
-                            <input type="text" name="firstName" id="reg_firstName" class="required" />
+                            <input type="text" name="first_name" id="reg_firstName" class="required" />
                             <span class="img-load valid-icon" data-src="images/icon-tick.svg"></span>
                         </div>
                         <div class="form__field form__field--narrow form__field--pad">
                             <label for="reg_lastName">Last name</label>
-                            <input type="text" name="lastName" id="reg_lastName" class="required" />
+                            <input type="text" name="last_name" id="reg_lastName" class="required" />
                             <span class="img-load valid-icon" data-src="images/icon-tick.svg"></span>
                         </div>
                         <div class="form__field">
@@ -56,7 +56,7 @@
                             <div class="required">
                                 <div class="select">
                                     <span></span>
-                                    <select name="dobDay" id="reg_dobDay">
+                                    <select name="dob_day" id="reg_dobDay">
                                         <option value="">Day</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -93,25 +93,25 @@
                                 </div>
                                 <div class="select">
                                     <span></span>
-                                    <select name="dobMonth" id="reg_dobMonth">
+                                    <select name="dob_month" id="reg_dobMonth">
                                         <option value="">Month</option>
-                                        <option value="Jan">Jan</option>
-                                        <option value="Feb">Feb</option>
-                                        <option value="Mar">Mar</option>
-                                        <option value="Apr">Apr</option>
-                                        <option value="May">May</option>
-                                        <option value="Jun">Jun</option>
-                                        <option value="Jul">Jul</option>
-                                        <option value="Aug">Aug</option>
-                                        <option value="Sep">Sep</option>
-                                        <option value="Oct">Oct</option>
-                                        <option value="Nov">Nov</option>
-                                        <option value="Dev">Dec</option>
+                                        <option value="1">Jan</option>
+                                        <option value="2">Feb</option>
+                                        <option value="3">Mar</option>
+                                        <option value="4">Apr</option>
+                                        <option value="5">May</option>
+                                        <option value="6">Jun</option>
+                                        <option value="7">Jul</option>
+                                        <option value="8">Aug</option>
+                                        <option value="9">Sep</option>
+                                        <option value="10">Oct</option>
+                                        <option value="11">Nov</option>
+                                        <option value="12">Dec</option>
                                     </select>
                                 </div>
                                 <div class="select">
                                     <span></span>
-                                    <select name="dobYear" id="reg_dobYear">
+                                    <select name="dob_year" id="reg_dobYear">
                                         <option value="">Year</option>
                                         <option value="2013">2013</option>
                                         <option value="2012">2012</option>
@@ -365,7 +365,7 @@
                 <div class="form-errors">
                     <p></p>
                 </div>
-                <form class="form ajax" data-method="PostPin" novalidate>
+                <form class="form ajax userPin" data-method="PUT" data-action="" novalidate>
                     <fieldset>
                         <legend>Boom! Done.</legend>
                         <p>Thank you! We’re now busy tailoring memo to work even better for you.<br />But while you’re here, why not set up your quick access options:</p>
@@ -413,7 +413,8 @@
     <!-- End Google Analytics -->
 
     <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/jquery.digest.js"></script>
     <script src="scripts/slick.min.js"></script>
     <script src="scripts/main.min.js"></script>
 </body>
-</html>
+</html>          
