@@ -126,6 +126,7 @@
         function doAjaxUnauthorized() {
             //If the request is successful, invoke callbacks immediately
             //without using Digest authentication
+
             return $.ajax(s)
                 .done(function(data, textStatus, jqXHR) {
                     dfd.resolve(data, textStatus, jqXHR);
@@ -168,6 +169,7 @@
         }
 
         function createAuthorizationHeader(xhr) {
+            console.log('createAuthorizationHeader');
             var header = xhr.getResponseHeader(DigestAjax.WWW_AUTHENTICATE);
             if (header !== undefined && header !== null) {
                 var params = parseWWWAuthenticateHeader(header);
@@ -246,26 +248,10 @@
 
                 var sb = [];
                 sb.push('Digest username="', username, '",');
-                sb.push('realm="', params.realm, '",');
-                sb.push('nonce="', params.nonce, '",');
-                sb.push('uri="', s.requestUri, '",');
-                sb.push('qop=', clientQop, ',');
-                if (nc !== undefined) {
-                    sb.push('nc=', nc, ',');
-                }
-                if (cnonce !== undefined) {
-                    sb.push('cnonce="', cnonce, '",');
-                }
-                if (params.opaque !== undefined) {
-                    sb.push('opaque="', params.opaque, '",');
-                }
-                var test = ha1 + ' : ' + params.nonce + ' : ' + nc + ' : ' + cnonce + ' : ' + clientQop + ' : ' + s.type + ' : ' + s.requestUri;
-                sb.push('test=', test, ',');
-                var cryptHa2 = CryptoJS.MD5(s.type + ':' + s.requestUri);
-                sb.push('ha2=', cryptHa2, ',');
-                sb.push('ben=', 'ben', ',');
-                sb.push('response="', response, '"');
-                return sb.join('');
+                sb.push('realm="', params.realm, '"');
+                var headers = sb.join('');
+                console.log(headers);
+                return headers;
             }
         }
         function parseWWWAuthenticateHeader(header) {
