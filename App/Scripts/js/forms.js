@@ -82,7 +82,11 @@ var forms = {
                 return false;
             }
 
-            form.find('.error-text').hide();
+            //reset any error messages
+            if( $('p.form-message').length ) {
+                $('p.form-message').removeClass('form-errors').html('');
+            }
+
             form.addClass('form--loading');
 
             try {
@@ -108,7 +112,6 @@ var forms = {
                         console.log(data);
                         forms.controller(data, form);
                     }).fail(function (data) {
-                        console.log(data);
                         form.find('.error-text').show();
                         form.removeClass('form--loading');
                     });
@@ -131,8 +134,6 @@ var forms = {
         });
     },
     controller: function (data, form) {
-        var errorTag = form.prev().find('p');
-
         form.removeClass('form--loading');
 
         if (data.status === "SUCCESS") {
@@ -140,8 +141,10 @@ var forms = {
         }
         else {
             //error handling for form
-            console.log(data.status);
-            errorTag.html(data.status);
+            if( $('p.form-message').length ) {
+                $('p.form-message').addClass('form-errors').html(data.message);
+            }
+
             return false;
         }
 

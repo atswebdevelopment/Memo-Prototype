@@ -7,23 +7,15 @@
 var fingerprint = {
     clientId: "Memo",
     init: function () {
-        $('form.userPin legend').html('Fingerprint init...');
         $('body').on('change', '.fingerprint-auth input', function () {
-            $('form.userPin legend').html('Fingerprint change...');
             if ($(this).val() === 'on') {
-                $('form.userPin legend').html('Fingerprint change...');
                 //Android
                 if (global.device === 'Android') {
                     FingerprintAuth.isAvailable(fingerprint.isAvailableSuccess, fingerprint.isAvailableError);
                 }
                 //iOS
                 else {
-                    $('form.userPin legend').html('Fingerprint iOS...');
-                    window.plugins.touchid.isAvailable(
-                        function(type) {$('form.userPin legend').html('Fingerprint Available...');},
-                        function(msg) {$('form.userPin legend').html(msg);}
-                    );
-                    //window.plugins.touchid.isAvailable(fingerprint.isAvailableSuccess, fingerprint.isAvailableError);
+                    window.plugins.touchid.isAvailable(fingerprint.isAvailableSuccess, fingerprint.isAvailableError);
                 }
             }
         });
@@ -51,7 +43,6 @@ var fingerprint = {
         }
     },
     isAvailableSuccess: function (result) {
-        $('form.userPin legend').html('Fingerprint available...');
         //Android
         if (global.device === 'Android') {
             if (result.isAvailable) {
@@ -67,12 +58,10 @@ var fingerprint = {
         }
         //iOS
         else {
-            $('form.userPin legend').html('Fingerprint available iOS...');
             window.plugins.touchid.verifyFingerprint('Scan your fingerprint please', fingerprint.encryptSuccessCallback, fingerprint.encryptErrorCallback);
         }
     },
     isAvailableError: function (message) {
-        $('form.userPin legend').html('Fingerprint unavailable...');
         console.log("isAvailableError(): " + message);
     },
     encryptSuccessCallback: function (result) {

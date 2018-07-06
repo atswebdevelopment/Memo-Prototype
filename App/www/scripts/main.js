@@ -44,23 +44,15 @@ var appData = {
 var fingerprint = {
     clientId: "Memo",
     init: function () {
-        $('form.userPin legend').html('Fingerprint init...');
         $('body').on('change', '.fingerprint-auth input', function () {
-            $('form.userPin legend').html('Fingerprint change...');
             if ($(this).val() === 'on') {
-                $('form.userPin legend').html('Fingerprint change...');
                 //Android
                 if (global.device === 'Android') {
                     FingerprintAuth.isAvailable(fingerprint.isAvailableSuccess, fingerprint.isAvailableError);
                 }
                 //iOS
                 else {
-                    $('form.userPin legend').html('Fingerprint iOS...');
-                    window.plugins.touchid.isAvailable(
-                        function(type) {$('form.userPin legend').html('Fingerprint Available...');},
-                        function(msg) {$('form.userPin legend').html(msg);}
-                    );
-                    //window.plugins.touchid.isAvailable(fingerprint.isAvailableSuccess, fingerprint.isAvailableError);
+                    window.plugins.touchid.isAvailable(fingerprint.isAvailableSuccess, fingerprint.isAvailableError);
                 }
             }
         });
@@ -88,7 +80,6 @@ var fingerprint = {
         }
     },
     isAvailableSuccess: function (result) {
-        $('form.userPin legend').html('Fingerprint available...');
         //Android
         if (global.device === 'Android') {
             if (result.isAvailable) {
@@ -104,12 +95,10 @@ var fingerprint = {
         }
         //iOS
         else {
-            $('form.userPin legend').html('Fingerprint available iOS...');
             window.plugins.touchid.verifyFingerprint('Scan your fingerprint please', fingerprint.encryptSuccessCallback, fingerprint.encryptErrorCallback);
         }
     },
     isAvailableError: function (message) {
-        $('form.userPin legend').html('Fingerprint unavailable...');
         console.log("isAvailableError(): " + message);
     },
     encryptSuccessCallback: function (result) {
@@ -246,7 +235,11 @@ var forms = {
                 return false;
             }
 
-            form.find('.error-text').hide();
+            //reset any error messages
+            if( $('p.form-message').length ) {
+                $('p.form-message').removeClass('form-errors').html('');
+            }
+
             form.addClass('form--loading');
 
             try {
@@ -272,7 +265,6 @@ var forms = {
                         console.log(data);
                         forms.controller(data, form);
                     }).fail(function (data) {
-                        console.log(data);
                         form.find('.error-text').show();
                         form.removeClass('form--loading');
                     });
@@ -295,8 +287,6 @@ var forms = {
         });
     },
     controller: function (data, form) {
-        var errorTag = form.prev().find('p');
-
         form.removeClass('form--loading');
 
         if (data.status === "SUCCESS") {
@@ -304,8 +294,10 @@ var forms = {
         }
         else {
             //error handling for form
-            console.log(data.status);
-            errorTag.html(data.status);
+            if( $('p.form-message').length ) {
+                $('p.form-message').addClass('form-errors').html(data.message);
+            }
+
             return false;
         }
 
@@ -658,8 +650,8 @@ var global = {
 
             if( auth ) {
                 headers = $.extend( headers, {
-                    'Username' : appData.store.getItem('userEmail'),
-                    'Key' : appData.store.getItem('userKey')
+                    'X-Username' : appData.store.getItem('userEmail'),
+                    'X-User-Key' : appData.store.getItem('userKey')
                 });
             }
 

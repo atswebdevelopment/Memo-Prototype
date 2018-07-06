@@ -223,6 +223,11 @@ label {
         }
 
         &--valid {
+            input, .select, textarea {
+                border-color: $success;
+                background: rgba($success,0.1);
+            }
+
             .valid-icon {
                 display: block;
             }

@@ -225,8 +225,8 @@ var global = {
 
             if( auth ) {
                 headers = $.extend( headers, {
-                    'Username' : appData.store.getItem('userEmail'),
-                    'Key' : appData.store.getItem('userKey')
+                    'X-Username' : appData.store.getItem('userEmail'),
+                    'X-User-Key' : appData.store.getItem('userKey')
                 });
             }
 
