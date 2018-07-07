@@ -37,9 +37,9 @@ var fingerprint = {
         }
         //iOS
         else {
-            if (appData.store.getItem('iOSTempKey') !== undefined) {
+            //if (appData.store.getItem('iOSTempKey') !== undefined) {
                 window.plugins.touchid.verifyFingerprint('Scan your fingerprint please', fingerprint.decryptSuccessCallback, fingerprint.decryptErrorCallback);
-            }
+            //}
         }
     },
     isAvailableSuccess: function (result) {
