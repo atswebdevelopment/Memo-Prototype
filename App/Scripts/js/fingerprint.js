@@ -26,7 +26,7 @@ var fingerprint = {
         console.log('fingerprint popup start');
         //Android
         if (global.device === 'Android') {
-            if (appData.getItem('fpToken') !== undefined) {
+            if (appData.getItem('fpToken') !== null) {
                 var decryptConfig = {
                     clientId: fingerprint.clientId,
                     username: appData.store.getItem('userEmail'),
@@ -37,7 +37,7 @@ var fingerprint = {
         }
         //iOS
         else {
-            if (appData.getItem('fpToken') !== undefined) {
+            if (appData.getItem('fpToken') !== null) {
                 window.plugins.touchid.verifyFingerprint('Scan your fingerprint please', fingerprint.decryptSuccessCallback, fingerprint.decryptErrorCallback);
             }
         }

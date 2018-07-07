@@ -47,10 +47,6 @@ var appData = {
 
     },
     setFingerprintCredentials: function (data) {
-        if(data === false) {
-            appData.store.removeItem('fpToken');
-        }
-
         if( global.device === 'Android' ) {
             appData.store.setItem('fpToken', data.token);
         } else {
