@@ -24,7 +24,6 @@ var fingerprint = {
     },
     onDeviceReady: function () {
         console.log('fingerprint popup start');
-        $('p.form-message').html('onDeviceReady');
         //Android
         if (global.device === 'Android') {
             if (appData.store.getItem('userFPToken') !== undefined) {
@@ -38,10 +37,9 @@ var fingerprint = {
         }
         //iOS
         else {
-            $('p.form-message').html('onDeviceReady iOS');
-            //if (appData.store.getItem('iOSTempKey') !== undefined) {
+            if (appData.store.getItem('iOSTempKey') !== undefined) {
                 window.plugins.touchid.verifyFingerprint('Scan your fingerprint please', fingerprint.decryptSuccessCallback, fingerprint.decryptErrorCallback);
-            //}
+            }
         }
     },
     isAvailableSuccess: function (result) {
@@ -91,7 +89,6 @@ var fingerprint = {
     },
     decryptSuccessCallback: function (result) {
         //Android
-        $('p.form-message').html('dSC');
         if (global.device === 'Android') {
             if (result.withFingerprint) {
                 console.log("Successful biometric authentication.");
@@ -106,16 +103,13 @@ var fingerprint = {
         }
         //iOS
         else {
-            $('p.form-message').html('dSC iOS');
             document.location.replace('dashboard.html');
         }
     },
     decryptErrorCallback: function (error) {
-        $('p.form-message').html('dEC');
         if (error === FingerprintAuth.ERRORS.FINGERPRINT_CANCELLED) {
             console.log("FingerprintAuth Dialog Cancelled!");
         } else {
-            $('p.form-message').html(error);
             console.log("FingerprintAuth Error: " + error);
         }
     }
