@@ -10,9 +10,24 @@ var appData = {
     init: function () {
         appData.get = global.models.getDigest;
     },
+
+    resetUser: function() {
+        var userTokens = [
+            'userEmail',
+            'userName',
+            'userKey',
+            'userApiUrl',
+            'fpToken'
+        ];
+        $.each(userTokens, function( index, value ) {
+            appData.store.removeItem(value);
+        });
+    },
+
     getItem: function(name) {
         return appData.store.getItem(name);
     },
+
     setWelcomeStatus: function (data) {
         appData.store.setItem('welcomeStatus', data);
     },
@@ -32,6 +47,14 @@ var appData = {
 
     },
     setFingerprintCredentials: function (data) {
-        appData.store.setItem('userFPToken', data.token);
+        if(data === false) {
+            appData.store.removeItem('fpToken');
+        }
+
+        if( global.device === 'Android' ) {
+            appData.store.setItem('fpToken', data.token);
+        } else {
+            appData.store.setItem('fpToken', data);
+        }
     }
 };

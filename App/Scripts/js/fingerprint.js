@@ -26,18 +26,18 @@ var fingerprint = {
         console.log('fingerprint popup start');
         //Android
         if (global.device === 'Android') {
-            if (appData.store.getItem('userFPToken') !== undefined) {
+            if (appData.getItem('fpToken') !== undefined) {
                 var decryptConfig = {
                     clientId: fingerprint.clientId,
                     username: appData.store.getItem('userEmail'),
-                    token: appData.store.getItem('userFPToken')
+                    token: appData.store.getItem('androidFPToken')
                 };
                 FingerprintAuth.decrypt(decryptConfig, fingerprint.decryptSuccessCallback, fingerprint.decryptErrorCallback);
             }
         }
         //iOS
         else {
-            if (appData.store.getItem('iOSTempKey') !== undefined) {
+            if (appData.getItem('fpToken') !== undefined) {
                 window.plugins.touchid.verifyFingerprint('Scan your fingerprint please', fingerprint.decryptSuccessCallback, fingerprint.decryptErrorCallback);
             }
         }
@@ -77,7 +77,7 @@ var fingerprint = {
         //iOS
         else {
             console.log(result);
-            appData.store.setItem('iOSTempKey', 'yes');
+            appData.setFingerprintCredentials('yes');
         }
     },
     encryptErrorCallback: function (error) {

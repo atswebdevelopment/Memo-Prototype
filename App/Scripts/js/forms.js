@@ -162,6 +162,8 @@ var forms = {
 
         //Register form
         if (form.hasClass('userRegister')) {
+            //Unset all local storage as we have a brand new user
+            appData.resetUser();
             $('.register--active').removeClass('register--active').next().addClass('register--active').find('fieldset').eq(0).addClass('active');
             $('.setUserEmailField').val($('.getUserEmailField').val());
             //Set our global API user variables

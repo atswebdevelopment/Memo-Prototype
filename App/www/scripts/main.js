@@ -10,9 +10,24 @@ var appData = {
     init: function () {
         appData.get = global.models.getDigest;
     },
+
+    resetUser: function() {
+        var userTokens = [
+            'userEmail',
+            'userName',
+            'userKey',
+            'userApiUrl',
+            'fpToken'
+        ];
+        $.each(userTokens, function( index, value ) {
+            appData.store.removeItem(value);
+        });
+    },
+
     getItem: function(name) {
         return appData.store.getItem(name);
     },
+
     setWelcomeStatus: function (data) {
         appData.store.setItem('welcomeStatus', data);
     },
@@ -32,7 +47,15 @@ var appData = {
 
     },
     setFingerprintCredentials: function (data) {
-        appData.store.setItem('userFPToken', data.token);
+        if(data === false) {
+            appData.store.removeItem('fpToken');
+        }
+
+        if( global.device === 'Android' ) {
+            appData.store.setItem('fpToken', data.token);
+        } else {
+            appData.store.setItem('fpToken', data);
+        }
     }
 };
 /*
@@ -63,18 +86,18 @@ var fingerprint = {
         console.log('fingerprint popup start');
         //Android
         if (global.device === 'Android') {
-            if (appData.store.getItem('userFPToken') !== undefined) {
+            if (appData.getItem('fpToken') !== undefined) {
                 var decryptConfig = {
                     clientId: fingerprint.clientId,
                     username: appData.store.getItem('userEmail'),
-                    token: appData.store.getItem('userFPToken')
+                    token: appData.store.getItem('androidFPToken')
                 };
                 FingerprintAuth.decrypt(decryptConfig, fingerprint.decryptSuccessCallback, fingerprint.decryptErrorCallback);
             }
         }
         //iOS
         else {
-            if (appData.store.getItem('iOSTempKey') !== undefined) {
+            if (appData.getItem('fpToken') !== undefined) {
                 window.plugins.touchid.verifyFingerprint('Scan your fingerprint please', fingerprint.decryptSuccessCallback, fingerprint.decryptErrorCallback);
             }
         }
@@ -114,7 +137,7 @@ var fingerprint = {
         //iOS
         else {
             console.log(result);
-            appData.store.setItem('iOSTempKey', 'yes');
+            appData.setFingerprintCredentials('yes');
         }
     },
     encryptErrorCallback: function (error) {
@@ -315,6 +338,8 @@ var forms = {
 
         //Register form
         if (form.hasClass('userRegister')) {
+            //Unset all local storage as we have a brand new user
+            appData.resetUser();
             $('.register--active').removeClass('register--active').next().addClass('register--active').find('fieldset').eq(0).addClass('active');
             $('.setUserEmailField').val($('.getUserEmailField').val());
             //Set our global API user variables
