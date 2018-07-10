@@ -9,7 +9,6 @@ var keyboard = {
 
     },
     onDeviceReady: function () {
-        $('p').html('keyboard');
-        Keyboard.show();
+        cordova.plugins.Keyboard.show();
     }
 };

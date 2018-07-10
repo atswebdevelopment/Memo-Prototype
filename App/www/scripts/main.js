@@ -716,8 +716,7 @@ var keyboard = {
 
     },
     onDeviceReady: function () {
-        $('p').html('keyboard');
-        Keyboard.show();
+        cordova.plugins.Keyboard.show();
     }
 };
 /*
@@ -742,8 +741,6 @@ var pages = {
         }
     },
     welcome: function () {
-        document.addEventListener('deviceready', keyboard.onDeviceReady.bind(this), false);
-
         //Welcome html
         var welcomeTitle = 'welcome to memo';
         //var welcomeIntro = 'your life in your pocket';
@@ -760,6 +757,8 @@ var pages = {
         //$('.memoWelcomeIntro').html(welcomeIntro);
     },
     dashboard: function () {
+        document.addEventListener('deviceready', keyboard.onDeviceReady.bind(this), false);
+        
         //Set logged in user name
         appData.get(appData.getItem('userApiUrl'), null).success(function (data) {
             appData.setUserName(data);
