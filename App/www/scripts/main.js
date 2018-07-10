@@ -758,7 +758,7 @@ var pages = {
     },
     dashboard: function () {
         document.addEventListener('deviceready', keyboard.onDeviceReady.bind(this), false);
-        
+
         //Set logged in user name
         appData.get(appData.getItem('userApiUrl'), null).success(function (data) {
             appData.setUserName(data);
