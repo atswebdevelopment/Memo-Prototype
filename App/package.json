@@ -24,7 +24,8 @@
       "cordova-plugin-android-fingerprint-auth": {},
       "cordova-plugin-touch-id": {
         "FACEID_USAGE_DESCRIPTION": " "
-      }
+      },
+      "cordova-plugin-keyboard": {}
     },
     "platforms": [
       "android",

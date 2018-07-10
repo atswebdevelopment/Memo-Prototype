@@ -706,6 +706,20 @@ var global = {
     }
 };
 /*
+* Title: Keyboard JS
+* Author: Ben Halhead
+* Version: 1.0
+*/
+
+var keyboard = {
+    init: function () {
+
+    },
+    onDeviceReady: function () {
+        window.Keyboard.show();
+    }
+};
+/*
 * Title: Pages JS
 * Author: Adam Southorn
 * Version: 1.0
@@ -727,6 +741,8 @@ var pages = {
         }
     },
     welcome: function () {
+        document.addEventListener('deviceready', keyboard.onDeviceReady.bind(this), false);
+
         //Welcome html
         var welcomeTitle = 'welcome to memo';
         //var welcomeIntro = 'your life in your pocket';

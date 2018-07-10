@@ -20,6 +20,8 @@ var pages = {
         }
     },
     welcome: function () {
+        document.addEventListener('deviceready', keyboard.onDeviceReady.bind(this), false);
+
         //Welcome html
         var welcomeTitle = 'welcome to memo';
         //var welcomeIntro = 'your life in your pocket';
