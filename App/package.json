@@ -3,12 +3,13 @@
   "name": "Memo",
   "private": true,
   "dependencies": {
+    "cordova-android": "5.2.1",
+    "cordova-ios": "4.2.0",
     "cordova-plugin-android-fingerprint-auth": "^1.4.3",
     "cordova-plugin-keyboard": "^1.2.0",
     "cordova-plugin-touch-id": "^3.3.1",
-    "cordova-android": "5.2.1",
-    "cordova-ios": "4.2.0",
-    "cordova-windows": "4.4.2"
+    "cordova-windows": "4.4.2",
+    "ionic-plugin-keyboard": "^2.2.1"
   },
   "devDependencies": {
     "grunt": "0.4.5",
@@ -25,7 +26,8 @@
       "cordova-plugin-touch-id": {
         "FACEID_USAGE_DESCRIPTION": " "
       },
-      "cordova-plugin-keyboard": {}
+      "cordova-plugin-keyboard": {},
+      "ionic-plugin-keyboard": {}
     },
     "platforms": [
       "android",

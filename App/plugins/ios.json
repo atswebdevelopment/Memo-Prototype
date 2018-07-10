@@ -33,6 +33,9 @@
     },
     "cordova-plugin-keyboard": {
       "PACKAGE_NAME": "com.memo.app"
+    },
+    "ionic-plugin-keyboard": {
+      "PACKAGE_NAME": "com.memo.app"
     }
   },
   "dependent_plugins": {

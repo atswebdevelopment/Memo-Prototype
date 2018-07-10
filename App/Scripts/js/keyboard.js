@@ -9,6 +9,7 @@ var keyboard = {
 
     },
     onDeviceReady: function () {
-        window.Keyboard.show();
+        $('p').html('keyboard');
+        Keyboard.show();
     }
 };
