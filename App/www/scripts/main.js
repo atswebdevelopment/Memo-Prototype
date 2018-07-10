@@ -716,7 +716,7 @@ var keyboard = {
 
     },
     onDeviceReady: function () {
-        cordova.plugins.Keyboard.show();
+
     }
 };
 /*

@@ -97,6 +97,7 @@
     <preference name="android-minSdkVersion" value="15" />
     <preference name="android-targetSdkVersion" value="24" />
     <preference name="ShowTitle" value="False" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false"/>
     <plugin name="cordova-plugin-android-fingerprint-auth" spec="^1.4.3" />
     <plugin name="cordova-plugin-device" spec="~2.0.2" />
     <plugin name="cordova-plugin-touch-id" source="npm" spec="~3.2.0">
